@@ -1,4 +1,6 @@
-﻿public class Player
+﻿using System.ComponentModel.DataAnnotations;
+
+public class Player
 {
     public string Name { get; private set; }
     public int Health { get; private set; }
@@ -13,6 +15,7 @@
         IsDefending = false;
     }
 
+    //Le Player attaque et en fonction du choix du player adverse l'attque peut être diviser par deux
     public void Attack(Player opponent)
     {
         int damage = opponent.IsDefending ? AttackPower / 2 : AttackPower;
@@ -27,18 +30,21 @@
         Console.WriteLine($"{Name} se défend et réduit les dégâts au prochain tour.");
     }
 
+    // Le heal est fixé a 10 a voir dans le dossier application --> Game monsieurs
     public void Heal(int amount)
     {
         Health += amount;
         Console.WriteLine($"{Name} se soigne de {amount} points de vie.");
     }
 
+    // Le joueurs prends des dégats
     public void TakeDamage(int damage)
     {
         Health -= damage;
         Console.WriteLine($"{Name} subit {damage} dégâts. Points de vie restants : {Health}");
     }
 
+    //méthode qui permet de voir si le joueurs et toujours en vie
     public bool IsAlive()
     {
         return Health > 0;
